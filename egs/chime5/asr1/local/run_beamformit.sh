@@ -25,6 +25,11 @@ odir=$2
 array=$3
 expdir=exp/enhan/`echo $odir | awk -F '/' '{print $NF}'`_`echo $bmf | tr ' ' '_'`
 
+if [ -z $BEAMFORMIT ] ; then
+    export BEAMFORMIT=$KALDI_ROOT/tools/BeamformIt
+fi
+export PATH=${PATH}:$BEAMFORMIT
+
 if ! command  -v BeamformIt &>/dev/null ; then
   echo "Missing BeamformIt, run 'cd $KALDI_ROOT/tools/; ./extras/install_beamformit.sh; cd -;'" && exit 1
 fi
